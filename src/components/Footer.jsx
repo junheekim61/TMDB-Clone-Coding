@@ -7,21 +7,21 @@ const Container = styled.div`
   height: 400px;
   display: flex;
   justify-content: center;
-  background-color: rgb(10, 29, 51);
+  background-color: rgb(11, 29, 51);
 `;
 
 const FooterContainer = styled.div`
-  width: 50%;
-  height: 250px;
   /* background-color: rgba(255, 255, 255, 0.164); */
+  width: 70%;
+  height: 250px;
   margin-top: 50px;
   display: flex;
 `;
 
 const LogoBox = styled.div`
+  /* border: 1px solid red; */
   width: 300px;
   height: 100%;
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
 `;
@@ -32,21 +32,30 @@ const FooterLogo = styled.img`
 `;
 
 const HelloNickname = styled.div`
-  height: 100px;
-  margin-top: 30px;
-  margin-right: 20px;
-  color: white;
-  font-size: 25px;
+  /* border: 1px solid red; */
+  min-width: 230px;
+  height: 110px;
+  margin-top: 18px;
+  margin-right: 5px;
+  color: #49bde0;
+  font-size: 22px;
+  font-weight: bold;
   align-self: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  box-shadow: 3px 3px 5px 0 rgb(34, 34, 34);
+  background-color: white;
 `;
 
 const LinkContainer = styled.div`
   /* border: 1px solid green; */
-  width: 170px;
+  min-width: 170px;
   height: 150px;
   font-size: 20px;
   color: white;
-  margin: 80px 10px 0 10px;
+  margin: 80px 10px 0 25px;
   display: flex;
   flex-direction: column;
 `;
@@ -73,7 +82,7 @@ export default function Footer() {
     <Container>
       <FooterContainer>
         <LogoBox>
-          <FooterLogo src={require('./FooterLogo.png')} alt="FooterImage" />
+          <FooterLogo src={require('../data/img/FooterLogo.png')} alt="FooterImage" />
           <HelloNickname>안녕하세요 nancy61!</HelloNickname>
         </LogoBox>
 

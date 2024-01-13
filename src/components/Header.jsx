@@ -7,7 +7,7 @@ const Container = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
-  background-color: rgb(13, 36, 63);
+  background-color: rgb(13, 37, 63);
 `;
 
 const PageContainer = styled.div`

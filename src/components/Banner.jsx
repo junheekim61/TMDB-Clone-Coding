@@ -12,7 +12,7 @@ const MainContainer = styled.div`
 const WelcomeContainer = styled.div`
   width: 100%;
   height: 400px;
-  background-color: rgb(5, 15, 27);
+  background-color: rgb(13, 37, 63);
 `;
 
 const WelcomeTitle = styled.div`

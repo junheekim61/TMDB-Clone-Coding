@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
+import Movie from '../components/Movies/Movie';
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 200vh;
   display: flex;
   justify-content: center;
   background: white;
@@ -11,17 +12,18 @@ const Container = styled.div`
 
 const MainContainer = styled.div`
   width: 80%;
-  height: 100vh;
+  height: 200vh;
   display: flex;
   justify-content: center;
   background: lightgray;
 `;
 
-
-export default function Movie() {
+export default function Movies() {
   return (
     <Container>
-      <MainContainer>Movie</MainContainer>
+      <MainContainer>
+        <Movie />
+      </MainContainer>
     </Container>
   );
 }

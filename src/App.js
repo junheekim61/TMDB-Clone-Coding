@@ -7,8 +7,7 @@ import Home from './pages/Home';
 import Celebrity from './pages/Celebrity';
 import More from './pages/More';
 import TV from './pages/TV';
-import Movie from './pages/Movie';
-
+import Movies from './pages/Movies';
 
 export default function App() {
   return (
@@ -18,7 +17,7 @@ export default function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/movie" element={<Movie />} />
+          <Route path="/movie" element={<Movies />} />
           <Route path="/tv" element={<TV />} />
           <Route path="/celebrity" element={<Celebrity />} />
           <Route path="/more" element={<More />} />

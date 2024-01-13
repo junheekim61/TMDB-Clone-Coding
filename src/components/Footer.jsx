@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { ReactComponent as FooterL } from '../data/img/FooterLogo.svg';
 
 const Container = styled.div`
   width: 100%;
   height: 400px;
   display: flex;
   justify-content: center;
-  background-color: rgb(11, 29, 51);
+  background-color: rgb(13, 37, 63);
 `;
 
 const FooterContainer = styled.div`
@@ -26,18 +27,18 @@ const LogoBox = styled.div`
   flex-direction: column;
 `;
 
-const FooterLogo = styled.img`
-  height: 180px;
+const FooterLogo = styled(FooterL)`
+  max-height: 120px;
   align-self: flex-end;
 `;
 
 const HelloNickname = styled.div`
   /* border: 1px solid red; */
   min-width: 230px;
-  height: 110px;
-  margin-top: 18px;
+  height: 50px;
+  margin-top: 30px;
   margin-right: 5px;
-  color: #49bde0;
+  color: rgb(1, 180, 228);
   font-size: 22px;
   font-weight: bold;
   align-self: flex-end;
@@ -82,7 +83,10 @@ export default function Footer() {
     <Container>
       <FooterContainer>
         <LogoBox>
-          <FooterLogo src={require('../data/img/FooterLogo.png')} alt="FooterImage" />
+          <FooterLogo
+            src={require('../data/img/FooterLogo.svg')}
+            alt="FooterImage"
+          />
           <HelloNickname>안녕하세요 nancy61!</HelloNickname>
         </LogoBox>
 

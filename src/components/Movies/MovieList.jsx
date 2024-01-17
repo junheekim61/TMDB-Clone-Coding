@@ -2,11 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { Col } from 'antd';
 
+const Column = styled(Col)`
+  display: flex;
+`;
+
 const Card = styled.div`
   position: relative;
-  height: 360px;
+  min-height: 360px;
   width: 182px;
-  border: 1px solid red;
+  border: 1px solid gray;
   border-radius: 10px;
   box-shadow: 2px 2px 3px 3px rgba(71, 71, 71, 0.218);
   background-color: white;
@@ -21,22 +25,37 @@ const CardPoster = styled.img`
 
 const Description = styled.div`
   position: relative;
-  margin: 20px 10px 5px 10px;
-  font-size: 1.3rem;
+  margin: 20px 8px 5px 8px;
+`;
+
+const MovieTitle = styled.h1`
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+`;
+
+const MovieDiscription = styled.p`
+  color: gray;
+  font-size: 1rem;
+  margin-bottom: 15px;
 `;
 
 export default function MovieList(props) {
+  const releasedDate = props.movieReleaseDate;
+  const releasedDate_arr = releasedDate.split('-');
   return (
-    <Col lg={24 / 5} md={(8 / 5) * 2} xs={(24 / 5) * 4}>
+    <Column lg={24 / 5} md={(8 / 5) * 2} xs={(24 / 5) * 4}>
       <Card>
         <a href={`/movie/${props.movieId}`}>
           <CardPoster src={props.image} alt={props.movieName} />
         </a>
         <Description>
-          <h1>Title</h1>
-          <p1>release date</p1>
+          <MovieTitle>{props.movieName}</MovieTitle>
+          <MovieDiscription>
+            {releasedDate_arr[1]}월 {releasedDate_arr[2]}, {releasedDate_arr[0]}
+          </MovieDiscription>
         </Description>
       </Card>
-    </Col>
+    </Column>
   );
 }

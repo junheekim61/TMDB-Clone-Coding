@@ -46,6 +46,7 @@ export default function Trending() {
       <MainContainer>
         <WelcomeContainer>
           <WelcomeTitle>트렌딩</WelcomeTitle>
+          <TrendingOptionBar></TrendingOptionBar>
         </WelcomeContainer>
       </MainContainer>
   );

@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../config/Config';
 
 const MainContainer = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 90%;
   display: flex;
   justify-content: center;
 `;
 
 const WelcomeContainer = styled.div`
-  border: 3px solid green;
+  /* border: 3px solid green; */
   width: 100%;
   height: 400px;
   background-color: rgb(13, 37, 63);
@@ -48,7 +48,7 @@ const SearchBar = styled.div`
 const SearchInput = styled.input`
   width: 90%;
   height: 70%;
-  margin: 5px 0 0 25px;
+  margin: 7px 0 0 25px;
   font-size: 20px;
   font-weight: 200;
   border-width: 0;

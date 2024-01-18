@@ -73,26 +73,26 @@ export default function Movie(props) {
     fetchMovies();
   }, []); // 빈 배열로 한 번만 실행되도록 설정
 
-  const handleScroll = () => {
-    const scrollTop = document.documentElement.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight;
-    const clientHeight = document.documentElement.clientHeight;
+  // const handleScroll = () => {
+  //   const scrollTop = document.documentElement.scrollTop;
+  //   const scrollHeight = document.documentElement.scrollHeight;
+  //   const clientHeight = document.documentElement.clientHeight;
 
-    if (scrollTop + clientHeight >= scrollHeight * 0.8 && !loading) {
-      setLoading(true);
-      setMoviePageCount((prevPageCount) => prevPageCount + 1);
-    }
-  };
+  //   if (scrollTop + clientHeight >= scrollHeight * 0.8 && !loading) {
+  //     setLoading(true);
+  //     setMoviePageCount((prevPageCount) => prevPageCount + 1);
+  //   }
+  // };
 
-  useEffect(() => {
-    // 스크롤 이벤트 리스너 등록
-    window.addEventListener('scroll', handleScroll);
+  // useEffect(() => {
+  //   // 스크롤 이벤트 리스너 등록
+  //   window.addEventListener('scroll', handleScroll);
 
-    // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [loading]); // loading이 변경될 때마다 useEffect 다시 실행
+  //   // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, [loading]); // loading이 변경될 때마다 useEffect 다시 실행
 
   const handleMoreButtonClick = () => {
     setLoading(true);

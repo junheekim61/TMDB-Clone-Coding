@@ -1,11 +1,11 @@
 import React from 'react';
-import Banner from '../components/Banner';
-import Trending from '../components/Trending';
+import Banner from '../components/Home/Search';
+import Trending from '../components/Home/Trending';
 import styled from 'styled-components';
-import Trailer from '../components/Trailer';
-import Popular from '../components/Popular';
-import FreeWatch from '../components/FreeWatch';
-import LeaderBoard from '../components/LeaderBoard';
+import Trailer from '../components/Home/Trailer';
+import Popular from '../components/Home/Popular';
+import FreeWatch from '../components/Home/FreeWatch';
+import LeaderBoard from '../components/Home/LeaderBoard';
 
 // import { ReactComponent as FirstImg } from '../data/img/ad.svg';
 

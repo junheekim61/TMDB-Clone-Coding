@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 const FilterContainer = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 300px;
   height: 1500px;
 `;
 
 const BarMenu = styled.div`
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
   background-color: white;
   width: 90%;
   height: 50px;

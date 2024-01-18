@@ -9,8 +9,18 @@ const Container = styled.div`
   width: 100%;
 `;
 
+const PageTitle = styled.div`
+  /* border: 1px solid pink; */
+  width: 100%;
+  height: 50px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  padding: 10px 10px 10px 5px;
+  line-height: 50px;
+`;
+
 const ContentContainer = styled.div`
-  border: 1px solid yellow;
+  /* border: 1px solid yellow; */
   width: 100%;
   display: flex;
   justify-content: flex-start;
@@ -18,7 +28,7 @@ const ContentContainer = styled.div`
 `;
 
 const MovieListContainer = styled.div`
-  border: 3px solid blue;
+  /* border: 3px solid blue; */
   width: 1100px;
 `;
 
@@ -92,6 +102,7 @@ export default function Movie(props) {
 
   return (
     <Container>
+      <PageTitle>인기 영화</PageTitle>
       <ContentContainer>
         <SideBar />
         <MovieListContainer>

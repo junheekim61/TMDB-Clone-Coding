@@ -24,6 +24,9 @@ const HeaderContainer = styled.div`
   align-items: center;
 `;
 
+const LogoLinkBox = styled(Link)`
+`;
+
 const Logo = styled.img`
   width: 154px;
 `;
@@ -61,15 +64,20 @@ const MoreLinkBox = styled(Link)`
   justify-content: center;
 `;
 
+
 export default function Header() {
+
   return (
     <Container>
       <PageContainer>
         <HeaderContainer>
-          <Logo
+          <LogoLinkBox to="/">
+            <Logo
             src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"
             alt="TMDB"
-          />
+            />
+          </LogoLinkBox>
+
           <LinkContainer>
             <LinkBox to="/movie">영화</LinkBox>
             <LinkBox to="/tv">TV프로그램</LinkBox>

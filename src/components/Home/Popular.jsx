@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const MainContainer = styled.div`
   border: 1px solid red;
-  width: 80%;
+  width: 90%;
   display: flex;
   justify-content: center;
 `;
@@ -20,11 +20,11 @@ const WelcomeTitle = styled.div`
   font-size: 60px;
 `;
 
-export default function Trending() {
+export default function Popular() {
   return (
       <MainContainer>
         <WelcomeContainer>
-          <WelcomeTitle>트렌딩</WelcomeTitle>
+          <WelcomeTitle>What's Popular</WelcomeTitle>
         </WelcomeContainer>
       </MainContainer>
   );

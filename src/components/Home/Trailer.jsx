@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const MainContainer = styled.div`
   border: 1px solid red;
-  width: 80%;
+  width: 90%;
   display: flex;
   justify-content: center;
 `;

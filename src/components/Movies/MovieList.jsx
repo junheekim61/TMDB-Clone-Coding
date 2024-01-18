@@ -7,10 +7,10 @@ const Column = styled(Col)`
 `;
 
 const Card = styled.div`
+  /* border: 1px solid gray; */
   position: relative;
   min-height: 360px;
   width: 182px;
-  border: 1px solid gray;
   border-radius: 10px;
   box-shadow: 2px 2px 3px 3px rgba(71, 71, 71, 0.218);
   background-color: white;

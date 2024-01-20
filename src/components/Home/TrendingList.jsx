@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Card = styled.div`
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
   position: relative;
-  height: 300px;
+  min-height: 300px;
   min-width: 150px;
   /* background-color: white; */
-  margin: 10px;
+  margin: 10px 10px 20px 10px;
 `;
 
 const CardPoster = styled.img`

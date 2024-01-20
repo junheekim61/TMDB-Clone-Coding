@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../config/Config';
 import TrendingList from './TrendingList';
+import trendingBackgroundImg from '/Users/junhee/Desktop/web_2023/umc_study/winter_study/cloneCoding/src/data/img/trending_backgound.png';
 
 const MainContainer = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 90%;
-  height: 400px;
+  min-height: 400px;
 `;
 
 const TopContainer = styled.div`
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   width: 100%;
   height: 60px;
   background-color: rgb(255, 255, 255);
@@ -18,7 +19,7 @@ const TopContainer = styled.div`
 `;
 
 const ConatinerTitle = styled.div`
-  border: 1px solid green;
+  /* border: 1px solid green; */
   height: 40px;
   font-weight: 500;
   margin: 20px 0 0 30px;
@@ -26,7 +27,7 @@ const ConatinerTitle = styled.div`
 `;
 
 const TrendingOptionBar = styled.div`
-  border: 1px solid black;
+  border: 1px solid rgb(13, 37, 63);
   width: 150px;
   height: 32px;
   display: flex;
@@ -34,8 +35,15 @@ const TrendingOptionBar = styled.div`
   margin: 18px 0 0 30px;
 `;
 
+const TXT = styled.p`
+  background: linear-gradient(-45deg, rgb(144, 206, 161), rgb(1, 180, 228));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+`;
+
 const OptionBoxLeft = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black; */
   font-weight: 500;
   width: 50%;
   height: 100%;
@@ -43,10 +51,13 @@ const OptionBoxLeft = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: rgb(13, 37, 63);
+  background-color: ${(props) =>
+    props.TrendingOpt === 'day' ? 'rgb(13, 37, 63)' : 'white'};
 `;
 
 const OptionBoxRight = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black; */
   font-weight: 500;
   width: 50%;
   height: 100%;
@@ -54,22 +65,25 @@ const OptionBoxRight = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: white;
+  background-color: ${(props) =>
+    props.TrendingOpt === 'week' ? 'rgb(13, 37, 63)' : 'white'};
 `;
 
 const TrendingListContainer = styled.div`
-  border: 2px solid purple;
+  /* border: 2px solid purple; */
   width: 100%;
-  height: 330px;
+  min-height: 330px;
   margin: 10px 0 0 0;
   display: flex;
   overflow: auto;
   white-space: nowrap;
-  background-image: url('../data/img/trending_backgound.png');
+  background-image: url(${trendingBackgroundImg});
   background-size: cover;
 `;
 
 const Space = styled.div`
-  border: 1px solid pink;
+  /* border: 1px solid pink; */
   min-width: 20px;
 `;
 
@@ -86,15 +100,34 @@ export default function Trending() {
         console.log(response);
         setTrendingMovies(response.results);
       });
-  }, []);
+    console.log(TrendingOption);
+  }, [TrendingOption]);
+
+  const handleChangeTrendingToWeek = () => {
+    setTrendingOption('week');
+  };
+
+  const handleChangeTrendingToToday = () => {
+    setTrendingOption('day');
+  };
 
   return (
     <MainContainer>
       <TopContainer>
         <ConatinerTitle>트렌딩</ConatinerTitle>
         <TrendingOptionBar>
-          <OptionBoxLeft>오늘</OptionBoxLeft>
-          <OptionBoxRight>이번 주</OptionBoxRight>
+          <OptionBoxLeft
+            onClick={handleChangeTrendingToToday}
+            TrendingOpt={TrendingOption}
+          >
+            <TXT>오늘</TXT>
+          </OptionBoxLeft>
+          <OptionBoxRight
+            onClick={handleChangeTrendingToWeek}
+            TrendingOpt={TrendingOption}
+          >
+            <TXT>이번 주</TXT>
+          </OptionBoxRight>
         </TrendingOptionBar>
       </TopContainer>
       <TrendingListContainer>

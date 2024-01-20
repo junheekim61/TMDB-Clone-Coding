@@ -9,9 +9,9 @@ const MainContainer = styled.div`
 `;
 
 const WelcomeContainer = styled.div`
+  border: 3px solid yellow;
   width: 100%;
   height: 400px;
-  background-color: rgb(255, 255, 255);
 `;
 
 const WelcomeTitle = styled.div`
@@ -22,13 +22,10 @@ const WelcomeTitle = styled.div`
 
 export default function Trailer() {
   return (
-      <MainContainer>
-        <WelcomeContainer>
-          <WelcomeTitle>최신 예고편</WelcomeTitle>
-        </WelcomeContainer>
-      </MainContainer>
+    <MainContainer>
+      <WelcomeContainer>
+        <WelcomeTitle>최신 예고편</WelcomeTitle>
+      </WelcomeContainer>
+    </MainContainer>
   );
 }
-
-
-

@@ -1,31 +1,169 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../config/Config';
+import TrailerList from './TrailerList';
+import trendingBackgroundImg from '/Users/junhee/Desktop/web_2023/umc_study/winter_study/cloneCoding/src/data/img/trending_backgound.png';
 
 const MainContainer = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 90%;
-  display: flex;
-  justify-content: center;
+  min-height: 400px;
 `;
 
-const WelcomeContainer = styled.div`
-  border: 3px solid yellow;
+const TopContainer = styled.div`
+  /* border: 1px solid blue; */
   width: 100%;
-  height: 400px;
+  height: 50px;
+  background-color: rgb(255, 255, 255);
+  display: flex;
 `;
 
-const WelcomeTitle = styled.div`
-  font-weight: bold;
-  margin: 90px 0 0 60px;
-  font-size: 60px;
+const ConatinerTitle = styled.div`
+  /* border: 1px solid green; */
+  height: 40px;
+  font-weight: 500;
+  margin: 24px 0 0 30px;
+  font-size: 25px;
 `;
 
-export default function Trailer() {
+const TrendingOptionBar = styled.div`
+  border: 1px solid rgb(13, 37, 63);
+  width: 150px;
+  height: 32px;
+  display: flex;
+  border-radius: 25px;
+  margin: 18px 0 0 30px;
+`;
+
+const TXT = styled.p`
+  background: linear-gradient(-45deg, rgb(144, 206, 161), rgb(1, 180, 228));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+`;
+
+const OptionBoxLeft = styled.div`
+  /* border: 1px solid black; */
+  font-weight: 500;
+  width: 50%;
+  height: 100%;
+  border-radius: 25px 0 0 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(13, 37, 63);
+  background-color: ${(props) =>
+    props.TrendingOpt === 'day' ? 'rgb(13, 37, 63)' : 'white'};
+`;
+
+const OptionBoxRight = styled.div`
+  /* border: 1px solid black; */
+  font-weight: 500;
+  width: 50%;
+  height: 100%;
+  border-radius: 0 25px 25px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  background-color: ${(props) =>
+    props.TrendingOpt === 'week' ? 'rgb(13, 37, 63)' : 'white'};
+`;
+
+const TrendingListContainer = styled.div`
+  /* border: 2px solid purple; */
+  width: 100%;
+  min-height: 330px;
+  margin: 10px 0 0 0;
+  display: flex;
+  overflow: auto;
+  white-space: nowrap;
+  background-image: url(${trendingBackgroundImg});
+  background-size: cover;
+`;
+
+const Space = styled.div`
+  /* border: 1px solid pink; */
+  min-width: 20px;
+`;
+
+export default function Trending() {
+  const [TrendingMovies, setTrendingMovies] = useState([]);
+  const [videos, setVideos] = useState([]);
+  const [TrendingOption, setTrendingOption] = useState('day');
+
+  const getMovies = () => {
+    const trendingMovies = `${API_URL}trending/movie/${TrendingOption}?api_key=${API_KEY}&language=ko-KR`;
+
+    fetch(trendingMovies)
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        setTrendingMovies(response.results);
+      });
+    console.log(TrendingOption);
+  };
+
+  const getVideos = () => {
+    const trendingMovies = `https://api.themoviedb.org/3/movie/787699/videos?api_key=${API_KEY}&language=ko-KR`;
+
+    fetch(trendingMovies)
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        setVideos(response.results);
+      });
+    console.log(TrendingOption);
+  };
+
+  useEffect(() => {
+    getMovies();
+    getVideos();
+  }, [TrendingOption]);
+
+  const handleChangeTrendingToWeek = () => {
+    setTrendingOption('week');
+  };
+
+  const handleChangeTrendingToToday = () => {
+    setTrendingOption('day');
+  };
+
   return (
     <MainContainer>
-      <WelcomeContainer>
-        <WelcomeTitle>최신 예고편</WelcomeTitle>
-      </WelcomeContainer>
+      <TopContainer>
+        <ConatinerTitle>최신 예고편</ConatinerTitle>
+        <TrendingOptionBar>
+          <OptionBoxLeft
+            onClick={handleChangeTrendingToToday}
+            TrendingOpt={TrendingOption}
+          >
+            <TXT>오늘</TXT>
+          </OptionBoxLeft>
+          <OptionBoxRight
+            onClick={handleChangeTrendingToWeek}
+            TrendingOpt={TrendingOption}
+          >
+            <TXT>이번 주</TXT>
+          </OptionBoxRight>
+        </TrendingOptionBar>
+      </TopContainer>
+      <TrendingListContainer>
+        <Space></Space>
+        {TrendingMovies &&
+          TrendingMovies.map((movie, index) => (
+            <React.Fragment key={index}>
+              <TrailerList
+                movieId={movie.id}
+                movieName={movie.title}
+                movieReleaseDate={movie.release_date}
+                // videosKey={videos[0]?.key}
+                videosKey={videos[0]?.key}
+              />
+            </React.Fragment>
+          ))}
+        <Space></Space>
+      </TrendingListContainer>
     </MainContainer>
   );
 }

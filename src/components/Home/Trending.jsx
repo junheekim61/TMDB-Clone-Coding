@@ -13,7 +13,7 @@ const MainContainer = styled.div`
 const TopContainer = styled.div`
   /* border: 1px solid blue; */
   width: 100%;
-  height: 60px;
+  height: 50px;
   background-color: rgb(255, 255, 255);
   display: flex;
 `;
@@ -22,8 +22,8 @@ const ConatinerTitle = styled.div`
   /* border: 1px solid green; */
   height: 40px;
   font-weight: 500;
-  margin: 20px 0 0 30px;
-  font-size: 30px;
+  margin: 24px 0 0 30px;
+  font-size: 25px;
 `;
 
 const TrendingOptionBar = styled.div`

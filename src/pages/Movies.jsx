@@ -10,7 +10,7 @@ const Container = styled.div`
 `;
 
 const MainContainer = styled.div`
-  width: 80%;
+  width: 90%;
   display: flex;
   justify-content: center;
   /* background: lightgray; */

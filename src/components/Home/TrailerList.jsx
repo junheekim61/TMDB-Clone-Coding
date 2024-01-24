@@ -42,9 +42,7 @@ export default function TrendingList(props) {
   return (
     <div>
       <Card>
-        <a href={`/movie/${props.movieId}`}>
-          <CardPoster src={props.image} alt={props.movieName} />
-        </a>
+        <YouTube videoId={props.videosKey}/>
         <Description>
           <MovieTitle>{props.movieName}</MovieTitle>
           <MovieDiscription>

@@ -10,11 +10,17 @@ const MainContainer = styled.div`
   min-height: 400px;
 `;
 
+const BlueCover = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: rgb(13, 37, 63, 0.8);
+`;
+
 const TopContainer = styled.div`
   /* border: 1px solid blue; */
   width: 100%;
-  height: 50px;
-  background-color: rgb(255, 255, 255);
+  height: 60px;
+  /* background-color: rgb(255, 255, 255); */
   display: flex;
 `;
 
@@ -22,24 +28,18 @@ const ConatinerTitle = styled.div`
   /* border: 1px solid green; */
   height: 40px;
   font-weight: 500;
-  margin: 24px 0 0 30px;
+  margin: 30px 0 0 30px;
   font-size: 25px;
+  color: white;
 `;
 
 const TrendingOptionBar = styled.div`
-  border: 1px solid rgb(13, 37, 63);
+  border: 1px solid rgb(144, 206, 161);
   width: 150px;
   height: 32px;
   display: flex;
   border-radius: 25px;
-  margin: 18px 0 0 30px;
-`;
-
-const TXT = styled.p`
-  background: linear-gradient(-45deg, rgb(144, 206, 161), rgb(1, 180, 228));
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+  margin: 24px 0 0 30px;
 `;
 
 const OptionBoxLeft = styled.div`
@@ -51,9 +51,13 @@ const OptionBoxLeft = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(13, 37, 63);
-  background-color: ${(props) =>
-    props.TrendingOpt === 'day' ? 'rgb(13, 37, 63)' : 'white'};
+  background: linear-gradient(-45deg, rgb(144, 206, 161), rgb(1, 180, 228));
+  background: ${(props) =>
+    props.TrendingOpt === 'day'
+      ? 'linear-gradient(-45deg, rgb(144, 206, 161), rgb(1, 180, 228));rgb(144, 206, 161)'
+      : 'none'};
+  color: rgb(13, 37, 63);;
+  color: ${(props) => (props.TrendingOpt === 'day' ? 'rgb(13, 37, 63);' : 'white')};
 `;
 
 const OptionBoxRight = styled.div`
@@ -65,20 +69,23 @@ const OptionBoxRight = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
-  background-color: ${(props) =>
-    props.TrendingOpt === 'week' ? 'rgb(13, 37, 63)' : 'white'};
+  background: linear-gradient(-45deg, rgb(144, 206, 161), rgb(1, 180, 228));
+  background: ${(props) =>
+    props.TrendingOpt === 'week'
+      ? 'linear-gradient(-45deg, rgb(144, 206, 161), rgb(1, 180, 228));rgb(144, 206, 161)'
+      : 'none'};
+  color: white;
+  color: ${(props) => (props.TrendingOpt === 'week' ? 'rgb(13, 37, 63);' : 'white')};
 `;
 
 const TrendingListContainer = styled.div`
   /* border: 2px solid purple; */
   width: 100%;
   min-height: 330px;
-  margin: 10px 0 0 0;
+  margin: 20px 0 0 0;
   display: flex;
   overflow: auto;
   white-space: nowrap;
-  background-image: url(${trendingBackgroundImg});
   background-size: cover;
 `;
 
@@ -88,37 +95,48 @@ const Space = styled.div`
 `;
 
 export default function Trending() {
-  const [TrendingMovies, setTrendingMovies] = useState([]);
+  const [movies, setMovies] = useState([]);
   const [videos, setVideos] = useState([]);
+  const [TrailerBackImage, setTrailerBackImage] = useState({});
   const [TrendingOption, setTrendingOption] = useState('day');
 
-  const getMovies = () => {
-    const trendingMovies = `${API_URL}trending/movie/${TrendingOption}?api_key=${API_KEY}&language=ko-KR`;
+  const getVideos = async (id) => {
+    /// 주석
+    const videosURL = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=ko-KR`;
 
-    fetch(trendingMovies)
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        setTrendingMovies(response.results);
-      });
-    console.log(TrendingOption);
+    try {
+      const response = await fetch(videosURL);
+      const videoData = await response.json();
+      return videoData.results[0] || null; // 첫 번째 비디오만 사용하거나, 비디오가 없으면 null을 반환
+    } catch (error) {
+      console.error('Error fetching videos', error);
+      return null;
+    }
   };
 
-  const getVideos = () => {
-    const trendingMovies = `https://api.themoviedb.org/3/movie/787699/videos?api_key=${API_KEY}&language=ko-KR`;
+  const getMovies = async () => {
+    /// 주석
+    const moviesURL = `${API_URL}trending/movie/${TrendingOption}?api_key=${API_KEY}&language=ko-KR`;
 
-    fetch(trendingMovies)
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        setVideos(response.results);
-      });
-    console.log(TrendingOption);
+    try {
+      const response = await fetch(moviesURL);
+      const movieData = await response.json();
+
+      const moviesWithVideos = await Promise.all(
+        movieData.results.map(async (movie) => {
+          const video = await getVideos(movie.id);
+          return { ...movie, video };
+        }),
+      );
+      setMovies(moviesWithVideos);
+      setTrailerBackImage(moviesWithVideos[0]);
+    } catch (error) {
+      console.error('Error fetching movies', error);
+    }
   };
 
   useEffect(() => {
     getMovies();
-    getVideos();
   }, [TrendingOption]);
 
   const handleChangeTrendingToWeek = () => {
@@ -130,40 +148,57 @@ export default function Trending() {
   };
 
   return (
-    <MainContainer>
-      <TopContainer>
-        <ConatinerTitle>최신 예고편</ConatinerTitle>
-        <TrendingOptionBar>
-          <OptionBoxLeft
-            onClick={handleChangeTrendingToToday}
-            TrendingOpt={TrendingOption}
-          >
-            <TXT>오늘</TXT>
-          </OptionBoxLeft>
-          <OptionBoxRight
-            onClick={handleChangeTrendingToWeek}
-            TrendingOpt={TrendingOption}
-          >
-            <TXT>이번 주</TXT>
-          </OptionBoxRight>
-        </TrendingOptionBar>
-      </TopContainer>
-      <TrendingListContainer>
-        <Space></Space>
-        {TrendingMovies &&
-          TrendingMovies.map((movie, index) => (
-            <React.Fragment key={index}>
-              <TrailerList
-                movieId={movie.id}
-                movieName={movie.title}
-                movieReleaseDate={movie.release_date}
-                // videosKey={videos[0]?.key}
-                videosKey={videos[0]?.key}
-              />
-            </React.Fragment>
-          ))}
-        <Space></Space>
-      </TrendingListContainer>
+    <MainContainer
+      style={{
+        backgroundImage: TrailerBackImage
+          ? `url(${IMAGE_BASE_URL}w1280${TrailerBackImage.backdrop_path})`
+          : 'none',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
+      <BlueCover>
+        <TopContainer>
+          <ConatinerTitle>최신 예고편</ConatinerTitle>
+          <TrendingOptionBar>
+            <OptionBoxLeft
+              onClick={handleChangeTrendingToToday}
+              TrendingOpt={TrendingOption}
+            >
+              오늘
+            </OptionBoxLeft>
+            <OptionBoxRight
+              onClick={handleChangeTrendingToWeek}
+              TrendingOpt={TrendingOption}
+            >
+              이번 주
+            </OptionBoxRight>
+          </TrendingOptionBar>
+        </TopContainer>
+        <TrendingListContainer>
+          <Space></Space>
+          {movies &&
+            movies.map((movie, index) => (
+              <React.Fragment key={index}>
+                {movie.video && ( // movie에 video가 존재하는 경우에만 렌더링
+                  <TrailerList
+                    backgroundImg={
+                      movie.poster_path
+                        ? `${IMAGE_BASE_URL}w500${movie.poster_path}`
+                        : null
+                    }
+                    movieId={movie.id}
+                    movieName={movie.title}
+                    movieReleaseDate={movie.release_date}
+                    videosKey={movie.video.key}
+                    videosName={movie.video.name}
+                  />
+                )}
+              </React.Fragment>
+            ))}
+          <Space></Space>
+        </TrendingListContainer>
+      </BlueCover>
     </MainContainer>
   );
 }

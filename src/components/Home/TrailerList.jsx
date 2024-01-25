@@ -8,32 +8,33 @@ const Card = styled.div`
   min-height: 300px;
   min-width: 150px;
   /* background-color: white; */
-  margin: 10px 10px 20px 10px;
-`;
-
-const CardPoster = styled.img`
-  width: 100%;
-  height: 230px;
-  border-radius: 10px;
-  box-shadow: 2px 2px 7px 7px rgba(71, 71, 71, 0.13);
+  margin: 10px 20px 20px 10px;
 `;
 
 const Description = styled.div`
   position: relative;
   margin: 20px 8px 5px 8px;
   white-space: normal;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
-const MovieTitle = styled.h1`
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 5px;
+const MovieTitle = styled.a`
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  text-decoration: none;
 `;
 
-const MovieDiscription = styled.p`
-  color: gray;
-  font-size: 1rem;
+const MovieDiscription = styled.a`
+  color: #ffffffb1;
+  font-size: 0.9rem;
+  font-weight: 400;
   margin-bottom: 15px;
+  text-decoration: none;
 `;
 
 export default function TrendingList(props) {
@@ -42,12 +43,16 @@ export default function TrendingList(props) {
   return (
     <div>
       <Card>
-        <YouTube videoId={props.videosKey}/>
+        <YouTube
+          videoId={props.videosKey}
+          opts={{
+            width: '300px',
+            height: '200px',
+          }}
+        />
         <Description>
-          <MovieTitle>{props.movieName}</MovieTitle>
-          <MovieDiscription>
-            {releasedDate_arr[1]}월 {releasedDate_arr[2]}, {releasedDate_arr[0]}
-          </MovieDiscription>
+          <MovieTitle href={`/movie/${props.movieId}`}>{props.movieName}</MovieTitle>
+          <MovieDiscription href={`/movie/${props.movieId}`}>{props.videosName}</MovieDiscription>
         </Description>
       </Card>
     </div>

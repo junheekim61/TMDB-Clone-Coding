@@ -13,7 +13,7 @@ const MainContainer = styled.div`
 const TopContainer = styled.div`
   /* border: 1px solid blue; */
   width: 100%;
-  height: 50px;
+  height: 60px;
   background-color: rgb(255, 255, 255);
   display: flex;
 `;
@@ -22,7 +22,7 @@ const ConatinerTitle = styled.div`
   /* border: 1px solid green; */
   height: 40px;
   font-weight: 500;
-  margin: 24px 0 0 30px;
+  margin: 30px 0 0 30px;
   font-size: 25px;
 `;
 
@@ -32,7 +32,7 @@ const TrendingOptionBar = styled.div`
   height: 32px;
   display: flex;
   border-radius: 25px;
-  margin: 18px 0 0 30px;
+  margin: 24px 0 0 30px;
 `;
 
 const TXT = styled.p`
@@ -73,7 +73,7 @@ const OptionBoxRight = styled.div`
 const TrendingListContainer = styled.div`
   /* border: 2px solid purple; */
   width: 100%;
-  min-height: 330px;
+  min-height: 360px;
   margin: 10px 0 0 0;
   display: flex;
   overflow: auto;

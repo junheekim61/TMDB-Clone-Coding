@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../config/Config';
-import TrailerList from './TrailerList';
+import TrailerList from './TrailerListTest';
 
 const MainContainer = styled.div`
   /* border: 1px solid red; */
@@ -55,9 +55,8 @@ const OptionBoxLeft = styled.div`
     props.TrendingOpt === 'day'
       ? 'linear-gradient(-45deg, rgb(144, 206, 161), rgb(1, 180, 228));rgb(144, 206, 161)'
       : 'none'};
-  color: rgb(13, 37, 63);
-  color: ${(props) =>
-    props.TrendingOpt === 'day' ? 'rgb(13, 37, 63);' : 'white'};
+  color: rgb(13, 37, 63);;
+  color: ${(props) => (props.TrendingOpt === 'day' ? 'rgb(13, 37, 63);' : 'white')};
 `;
 
 const OptionBoxRight = styled.div`
@@ -75,8 +74,7 @@ const OptionBoxRight = styled.div`
       ? 'linear-gradient(-45deg, rgb(144, 206, 161), rgb(1, 180, 228));rgb(144, 206, 161)'
       : 'none'};
   color: white;
-  color: ${(props) =>
-    props.TrendingOpt === 'week' ? 'rgb(13, 37, 63);' : 'white'};
+  color: ${(props) => (props.TrendingOpt === 'week' ? 'rgb(13, 37, 63);' : 'white')};
 `;
 
 const TrendingListContainer = styled.div`
@@ -95,7 +93,7 @@ const Space = styled.div`
   min-width: 20px;
 `;
 
-export default function Trailer() {
+export default function Trending() {
   const [movies, setMovies] = useState([]);
   const [videos, setVideos] = useState([]);
   const [TrailerBackImage, setTrailerBackImage] = useState({});
@@ -136,6 +134,10 @@ export default function Trailer() {
     }
   };
 
+  useEffect(() => {
+    getMovies();
+  }, [TrendingOption]);
+
   const handleChangeTrendingToWeek = () => {
     setTrendingOption('week');
   };
@@ -143,15 +145,6 @@ export default function Trailer() {
   const handleChangeTrendingToToday = () => {
     setTrendingOption('day');
   };
-
-  const handleHoverThumbnail = (index) => {
-    setTrailerBackImage(movies[index]);
-    console.log(TrailerBackImage);
-  };
-
-  useEffect(() => {
-    getMovies();
-  }, [TrendingOption]);
 
   return (
     <MainContainer
@@ -187,19 +180,18 @@ export default function Trailer() {
             movies.map((movie, index) => (
               <React.Fragment key={index}>
                 {movie.video && ( // movie에 video가 존재하는 경우에만 렌더링
-                  <div onMouseEnter={() => handleHoverThumbnail(index)}>
-                    <TrailerList
-                      image={
-                        movie.backdrop_path
-                          ? `url(${IMAGE_BASE_URL}w1280${movie.backdrop_path})`
-                          : null
-                      }
-                      movieId={movie.id}
-                      movieName={movie.title}
-                      videosKey={movie.video.key}
-                      videosName={movie.video.name}
-                    />
-                  </div>
+                  <TrailerList
+                    backgroundImg={
+                      movie.poster_path
+                        ? `${IMAGE_BASE_URL}w500${movie.poster_path}`
+                        : null
+                    }
+                    movieId={movie.id}
+                    movieName={movie.title}
+                    movieReleaseDate={movie.release_date}
+                    videosKey={movie.video.key}
+                    videosName={movie.video.name}
+                  />
                 )}
               </React.Fragment>
             ))}

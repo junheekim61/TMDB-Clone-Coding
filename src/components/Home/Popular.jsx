@@ -24,7 +24,7 @@ export default function Popular() {
   return (
       <MainContainer>
         <WelcomeContainer>
-          <WelcomeTitle>What's Popular</WelcomeTitle>
+          <WelcomeTitle>Popular</WelcomeTitle>
         </WelcomeContainer>
       </MainContainer>
   );

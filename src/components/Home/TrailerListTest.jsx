@@ -5,17 +5,10 @@ import styled from 'styled-components';
 const Card = styled.div`
   /* border: 1px solid gray; */
   position: relative;
-  min-height: 200px;
-  min-width: 300px;
+  min-height: 300px;
+  min-width: 150px;
   /* background-color: white; */
   margin: 10px 20px 20px 10px;
-`;
-
-const CardPoster = styled.div`
-  width: 100%;
-  height: 200px;
-  border-radius: 7px;
-  box-shadow: 2px 2px 7px 7px rgba(71, 71, 71, 0.13);
 `;
 
 const Description = styled.div`
@@ -30,7 +23,7 @@ const Description = styled.div`
 
 const MovieTitle = styled.a`
   color: white;
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   font-weight: 500;
   margin-bottom: 10px;
   text-decoration: none;
@@ -44,26 +37,20 @@ const MovieDiscription = styled.a`
   text-decoration: none;
 `;
 
-export default function TrailerList(props) {
+export default function TrendingList(props) {
   return (
     <div>
       <Card>
-        <a href={`/movie/${props.movieId}`}>
-          <CardPoster
-            style={{
-              backgroundImage: props.image ? props.image : 'none',
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-            }}
-          />
-        </a>
+        {/* <YouTube
+          videoId={props.videosKey}
+          opts={{
+            width: '300px',
+            height: '200px',
+          }}
+        /> */}
         <Description>
-          <MovieTitle href={`/movie/${props.movieId}`}>
-            {props.movieName}
-          </MovieTitle>
-          <MovieDiscription href={`/movie/${props.movieId}`}>
-            {props.videosName}
-          </MovieDiscription>
+          <MovieTitle href={`/movie/${props.movieId}`}>{props.movieName}</MovieTitle>
+          <MovieDiscription href={`/movie/${props.movieId}`}>{props.videosName}</MovieDiscription>
         </Description>
       </Card>
     </div>

@@ -149,6 +149,11 @@ export default function Trailer() {
     console.log(TrailerBackImage);
   };
 
+  const handleVideoClick = (index) => {
+    setTrailerBackImage(movies[index]);
+    console.log('videoClick');
+  };
+
   useEffect(() => {
     getMovies();
   }, [TrendingOption]);
@@ -161,6 +166,7 @@ export default function Trailer() {
           : 'none',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
+        transition: 'background-image 0.5s ease-in-out',
       }}
     >
       <BlueCover>
@@ -187,7 +193,13 @@ export default function Trailer() {
             movies.map((movie, index) => (
               <React.Fragment key={index}>
                 {movie.video && ( // movie에 video가 존재하는 경우에만 렌더링
-                  <div onMouseEnter={() => handleHoverThumbnail(index)}>
+                  <div
+                    style={{
+                      transition: 'background-image 0.5s ease-in-out',
+                    }}
+                    onMouseEnter={() => handleHoverThumbnail(index)}
+                    onClick={() => handleVideoClick(index)}
+                  >
                     <TrailerList
                       image={
                         movie.backdrop_path
